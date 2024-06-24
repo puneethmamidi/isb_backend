@@ -3,8 +3,7 @@
     "builds": [
       {
         "src": "./index.js",
-        "use": "@vercel/node",
-        "files": ["F:\\Isb_backend\\isrgrootx1.pem"]
+        "use": "@vercel/node"
       }
     ],
     "routes": [
@@ -17,4 +16,5 @@
     "env": {
       "file": ".env"
     }
+   
   }
