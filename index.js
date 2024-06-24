@@ -1,6 +1,7 @@
 const config = require('./config/environment');
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
 const mysql = require('mysql');
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ const dbHost = process.env.DB_HOST;
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
+const dbPort = process.env.DB_PORT
 
 
 
@@ -17,7 +19,11 @@ const db = mysql.createConnection({
     host: dbHost,
     user: dbUser,
     password: dbPassword,
-    database: dbName
+    database: dbName,
+    port:dbPort,
+    ssl: {
+        ca: fs.readFileSync('isrgrootx1.pem')
+      }
   });
 
 
