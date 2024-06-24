@@ -79,9 +79,8 @@
     "vary": "^1.1.2"
   },
   "scripts": {
-    "dev": "nodemon index.js",
-    "build": "echo 'Nothing to build'",
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
