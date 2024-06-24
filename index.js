@@ -30,6 +30,8 @@ db.connect((err) => {
     console.log('Database Connected');
 }); 
 
+// Vercel
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 app.get('/object/:id', (req, res) => {
     const id = parseInt(req.params.id); // Ensure id is parsed as an integer
