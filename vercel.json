@@ -15,6 +15,6 @@
     ],
     "env": {
       "file": ".env"
-    }
-    
+    },
+    "files": ["F:\\Isb_backend\\isrgrootx1.pem"]
   }
