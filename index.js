@@ -1,10 +1,22 @@
 const config = require('./config/environment');
 require('dotenv').config();
 const express = require('express');
-//const fs = require('fs');
-const mysql = require('mysql');
+const fs = require('fs');
+const mysql2 = require('mysql');
 const app = express();
 app.use(express.json());
+
+const options = {
+    host: process.env.DB_HOST || '127.0.0.1',
+    port: process.env.DB_PORT || 4000,
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_DATABASE || 'test',
+    ssl: process.env.DB_ENABLE_SSL === 'true' ? {
+       minVersion: 'TLSv1.2',
+       ca: process.env.DB_CA_PATH ? fs.readFileSync(process.env.DB_CA_PATH) : undefined
+    } : null,
+ }
 
 
 const dbHost = process.env.DB_HOST;
@@ -12,21 +24,23 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 
-const db = mysql.createPool({
-    connectionLimit: 10,
+const db = mysql2.createConnection({
     host: dbHost,
     user: dbUser,
     password: dbPassword,
-    database: dbName
+    database: dbName,
+    ssl:{
+        ca:''
+    }
+   
 });
 
 // Checking Database Connection
-db.getConnection((err, connection) => {
+db.connect((err, connection) => {
     if (err) {
         console.error('Error connecting to database:', err);
         return;
     }
-
     console.log('Database connected!');
 
 });
