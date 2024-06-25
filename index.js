@@ -11,7 +11,7 @@ const options = {
     port: process.env.DB_PORT || 4000,
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_DATABASE || 'test',
+    database: process.env.DB_DATABASE || 'exp',
     ssl: process.env.DB_ENABLE_SSL === 'true' ? {
        minVersion: 'TLSv1.2',
        ca: process.env.DB_CA_PATH ? fs.readFileSync(process.env.DB_CA_PATH) : undefined
@@ -19,21 +19,7 @@ const options = {
  }
 
 
-const dbHost = process.env.DB_HOST;
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
-const dbName = process.env.DB_NAME;
-
-const db = mysql2.createConnection({
-    host: dbHost,
-    user: dbUser,
-    password: dbPassword,
-    database: dbName,
-    ssl:{
-        ca:''
-    }
-   
-});
+const db = mysql2.createConnection(options)
 
 // Checking Database Connection
 db.connect((err, connection) => {
