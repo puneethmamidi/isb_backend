@@ -1,7 +1,7 @@
 const config = require('./config/environment');
 require('dotenv').config();
 const express = require('express');
-const fs = require('fs');
+//const fs = require('fs');
 const mysql = require('mysql');
 const app = express();
 app.use(express.json());
@@ -12,23 +12,24 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
+    connectionLimit: 10,
     host: dbHost,
     user: dbUser,
     password: dbPassword,
     database: dbName
-  });
-
+});
 
 // Checking Database Connection
-db.connect((err) => {
+db.getConnection((err, connection) => {
     if (err) {
-      console.error(err);
-      return;
+        console.error('Error connecting to database:', err);
+        return;
     }
-    console.log('Database Connected');
-}); 
 
+    console.log('Database connected!');
+
+});
 // Vercel
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
