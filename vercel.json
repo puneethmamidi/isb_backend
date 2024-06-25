@@ -12,9 +12,7 @@
         "dest": "/",
         "methods": ["GET", "POST", "PUT", "PATCH", "OPTIONS"]
       }
-    ],
-    "env": {
-      "file": ".env"
-    }
+    ]
+   
    
   }
