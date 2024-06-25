@@ -11,21 +11,12 @@ const dbHost = process.env.DB_HOST;
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
-const dbPort = process.env.DB_PORT;
-const dbCa = process.env.DB_CA;
-
-
-
 
 const db = mysql.createConnection({
     host: dbHost,
     user: dbUser,
     password: dbPassword,
-    database: dbName,
-    port:dbPort,
-    ssl: {
-        ca: fs.readFileSync(dbCa)
-      }
+    database: dbName
   });
 
 
